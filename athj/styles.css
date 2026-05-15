@@ -427,4 +427,37 @@ img {
     }
 }
 
+/* Policy Details (Accordion) */
+.policy {
+  max-width: 600px;
+  margin: 0 auto 3rem;
+  text-align: left;
+  background: var(--color-bg-light);
+  padding: 1.5rem;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  color: var(--color-text-main);
+  border: 1px solid #e2e8f0;
+  cursor: pointer;
+}
 
+.policy summary {
+  font-weight: bold;
+  color: var(--color-primary);
+  font-size: 1.05rem;
+  outline: none;
+}
+
+.policy[open] summary {
+  margin-bottom: 1rem;
+  border-bottom: 1px solid #cbd5e1;
+  padding-bottom: 0.5rem;
+}
+
+.policy ul {
+  list-style: disc;
+  padding-left: 1.2rem;
+  line-height: 1.6;
+  margin-top: 0;
+  cursor: text;
+}
