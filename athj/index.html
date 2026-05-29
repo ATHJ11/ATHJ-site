@@ -7,14 +7,140 @@
     <title>ATHJ - Athletic Training Hub Japan</title>
     <meta name="description"
         content="ATHJ（Athletic Training Hub Japan）の公式サイト。スポーツ現場でAthletic Training業務に関わる実践者のための登録制コミュニティ。">
+    
     <!-- OGP (Placeholder) -->
     <meta property="og:title" content="ATHJ - Athletic Training Hub Japan">
     <meta property="og:description" content="現場の知を、社会の価値へ。スポーツ現場の課題解決に取り組むAthletic Training登録制コミュニティ。">
     <meta property="og:type" content="website">
 
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800&family=Noto+Sans+JP:wght@400;500;700;800&display=swap" rel="stylesheet">
+
+    <!-- Stylesheet -->
     <link rel="stylesheet" href="styles.css">
+
+    <style>
+        /* 定義とスタンス：左右カードを同じ高さに揃える */
+        .definition-grid {
+            align-items: stretch;
+        }
+
+        .definition-grid .card,
+        .definition-grid .stance-card {
+            height: 100%;
+        }
+
+        /* ATHJのスタンス：段落間の余白（必要なら） */
+        .card p {
+            margin: 0 0 12px;
+            line-height: 1.8;
+        }
+
+        .card p:last-child {
+            margin-bottom: 0;
+        }
+
+        .stance-panel {
+            border: 1px solid rgba(0,0,0,.12);
+            border-radius: 14px;
+            background: #fff;
+            padding: 22px;
+            margin-top: 18px;
+            margin-bottom: 1.5rem;
+        }
+
+        .stance-panel__grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 22px;
+            align-items: start;
+        }
+
+        .stance-panel__heading {
+            margin: 0 0 12px;
+            font-size: 18px;
+        }
+
+        .stance-panel__col p {
+            margin: 0 0 12px;
+            line-height: 1.85;
+        }
+
+        .stance-panel__col p:last-child {
+            margin-bottom: 0;
+        }
+
+        .stance-panel__col--border {
+            border-left: 4px solid #f0a500;
+            padding-left: 18px;
+        }
+
+        .stance-panel__list {
+            margin: 0;
+            padding-left: 18px;
+            line-height: 1.8;
+        }
+
+        .stance-panel__list li {
+            margin: 0 0 10px;
+        }
+
+        .stance-panel__list li:last-child {
+            margin-bottom: 0;
+        }
+
+        .participant-box {
+            background: var(--color-bg-light);
+            border-radius: 8px;
+            padding: 1.5rem;
+            border: 1px solid var(--color-card-border);
+        }
+
+        .participant-box__heading {
+            font-weight: bold;
+            font-size: 1.1rem;
+            color: var(--color-primary);
+            margin: 0 0 1rem;
+            font-family: var(--font-heading);
+        }
+
+        .participant-box__list {
+            margin: 0;
+            padding-left: 1.2rem;
+            line-height: 1.8;
+            display: flex;
+            flex-direction: column;
+            gap: 0.4rem;
+        }
+
+        @media (max-width: 900px) {
+            .stance-panel__grid {
+                grid-template-columns: 1fr;
+            }
+
+            .stance-panel__col--border {
+                border-left: none;
+                border-top: 4px solid #f0a500;
+                padding-left: 0;
+                padding-top: 16px;
+            }
+        }
+    </style>
+    
     <!-- Favicon (Placeholder code, no file required for basic render) -->
     <link rel="icon" href="data:;base64,iVBORw0KGgo=">
+
+    <!-- Dark Mode Initial State Handler (Inline to prevent FOUT) -->
+    <script>
+        (function() {
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme === 'dark' || (!savedTheme && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+                document.documentElement.setAttribute('data-theme', 'dark');
+            }
+        })();
+    </script>
 </head>
 
 <body>
@@ -23,8 +149,30 @@
         <div class="container header-inner">
             <h1 class="logo">ATHJ</h1>
             <nav class="site-nav">
-                <a href="#about">ATHJとは</a>
-                <a href="#mission">Mission</a>
+                <a href="#about-mvv">ATHJとは</a>
+                <a href="#definition">定義とスタンス</a>
+                <a href="#activities">活動内容</a>
+                
+                <!-- Dark Mode Toggle Button -->
+                <button id="theme-toggle" class="theme-toggle" aria-label="テーマ切り替え">
+                    <!-- Sun icon (for dark theme) -->
+                    <svg class="sun-icon" viewBox="0 0 24 24" style="display: none;">
+                        <circle cx="12" cy="12" r="5" stroke="currentColor" stroke-width="2" fill="none"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3" stroke="currentColor" stroke-width="2"></line>
+                        <line x1="12" y1="21" x2="12" y2="23" stroke="currentColor" stroke-width="2"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64" stroke="currentColor" stroke-width="2"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78" stroke="currentColor" stroke-width="2"></line>
+                        <line x1="1" y1="12" x2="3" y2="12" stroke="currentColor" stroke-width="2"></line>
+                        <line x1="21" y1="12" x2="23" y2="12" stroke="currentColor" stroke-width="2"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36" stroke="currentColor" stroke-width="2"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22" stroke="currentColor" stroke-width="2"></line>
+                    </svg>
+                    <!-- Moon icon (for light theme) -->
+                    <svg class="moon-icon" viewBox="0 0 24 24">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" stroke="currentColor" stroke-width="2" fill="none"></path>
+                    </svg>
+                </button>
+
                 <a href="https://docs.google.com/forms/d/1UrkkOiXoqBjdWHItOQJ3YBxa2r7YbhFQYjuTwQZQxQI/viewform"
                     target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-sm">登録する（無料）</a>
             </nav>
@@ -39,19 +187,24 @@
                 <p class="hero-sub" style="font-size: 1.2rem; font-weight: bold; line-height: 1.5;">安全と専門性を、<br
                         class="mobile-br">日本のスポーツの標準にする。</p>
                 <p class="hero-sub mt-2">Athletic Training Hub Japan</p>
-                <p id="member-count" style="font-weight: bold; margin-top: 1.5rem; color: var(--color-primary);">
+                <hr class="hero-divider">
+                <p class="hero-subcopy">
+                    スポーツ現場のアスレティックトレーニング（業務領域）に関わる実践者のためのハブです。
+                </p>
+                <hr class="hero-divider">
+                <p id="member-count" style="font-weight: bold; margin-top: 1.5rem; color: var(--color-accent);">
                     登録者数：—人（更新中）</p>
                 <a href="https://docs.google.com/forms/d/1UrkkOiXoqBjdWHItOQJ3YBxa2r7YbhFQYjuTwQZQxQI/viewform"
                     target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-large"
-                    style="margin-top: 1rem;">登録制コミュニティに参加する</a>
+                    style="margin-top: 1rem;">登録する</a>
             </div>
         </section>
 
         <!-- New: Why ATHJ (Full Text Story) -->
-        <section id="why-athj" class="section" style="padding-top: 3rem; padding-bottom: 2rem;">
+        <section id="why-athj" class="section reveal" style="padding-top: 3rem; padding-bottom: 2rem;">
             <div class="container">
                 <h2 class="section-title">Why ATHJ（なぜATHJ）</h2>
-                <div style="background: var(--color-bg-light); border-radius: 8px; padding: 2.5rem 2rem; border: 1px solid #e2e8f0; margin-top: 1.5rem;">
+                <div style="background: var(--color-bg-light); border-radius: 8px; padding: 2.5rem 2rem; border: 1px solid var(--color-card-border); margin-top: 1.5rem;">
                     
                     <div class="story-text" style="font-size: 1.05rem; line-height: 2; color: var(--color-text-main); max-width: 800px; margin: 0 auto;">
                         <p style="margin-bottom: 1.8rem;">近年、「トレーナー」や「スポーツトレーナー」という言葉の認知度は高まりつつあります。 一方で、「トレーナー」に対する人々の理解は一様ではなく、その役割や専門性が誤解されることも少なくありません。 そこで、様々な資格や背景を持ち、それぞれの分野で活躍するアスレティックトレーナーたちが、「アスレティックトレーニングとは何か」を共有し、社会に向けて発信していくことが不可欠であると考えます。 </p>
@@ -65,7 +218,7 @@
         </section>
 
         <!-- 2) About & MVV -->
-        <section id="about-mvv" class="section bg-light">
+        <section id="about-mvv" class="section bg-light reveal">
             <div class="container text-center">
                 <h2 class="section-title">ATHJとは</h2>
                 <p class="about-lead about-lead-wide jp-wrap" style="margin-bottom: 2rem;">スポーツ現場でAthletic Training業務に関わる実践者がつながり<br>実務的な課題解決と価値創造を行うためのハブとして機能するコミュニティです。</p>
@@ -73,7 +226,7 @@
                 <h3 style="color: var(--color-primary); font-size: 1.3rem;">Purpose</h3>
                 <p class="purpose-text jp-wrap" style="font-weight: bold; font-size: 1.1em; color: var(--color-accent); margin-bottom: 2rem;">現場の知を、社会の価値へ。<br>安全と専門性を、日本のスポーツの標準にする。</p>
 
-                <div class="mvv-panel" style="background: var(--color-white); padding: 2.5rem; border-radius: 8px; border: 1px solid #e2e8f0; box-shadow: 0 4px 6px rgba(0,0,0,0.05); max-width: 800px; margin: 0 auto; text-align: left;">
+                <div class="mvv-panel">
                     <div class="mvv-row">
                         <div class="mvv-label">Mission</div>
                         <div class="mvv-value jp-wrap">スポーツ現場のAthletic Trainingの価値を言語化し、社会に定着させる。</div>
@@ -94,40 +247,63 @@
             </div>
         </section>
 
-        <!-- 3) Definition and Stance -->
-        <section id="definition" class="section">
+        <section id="stance" class="section reveal">
             <div class="container">
-                <h2 class="section-title">定義とスタンス</h2>
-                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; margin-bottom: 2rem;">
-                    <div style="background: var(--color-white); padding: 1.5rem; border: 1px solid #e2e8f0; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.02);">
-                        <h3 style="color: var(--color-primary); margin-bottom: 1rem; font-size: 1.2rem;">ATHJにおけるATの定義</h3>
-                        <p>資格名ではなく、業務領域（Athletic Training）を指します。予防・準備・救急対応・健康支援・多職種連携を通じ、スポーツ現場の安全と専門性を支える役割と責任で定義します。</p>
+                <h2 class="section-title">スタンスと境界線</h2>
+
+                <div class="stance-wrap">
+                    <div class="stance-card">
+                        <div class="stance-tag">STANCE</div>
+                        <h3 class="stance-title">ATHJのスタンス</h3>
+                        <div class="stance-accent"></div>
+
+                        <div class="stance-item">
+                            <div class="stance-ic">👤</div>
+                            <p>ATHJのATとは資格名ではなく、業務領域（Athletic Training）を指します。またアスレティックトレーナーとは、アスレティックトレーニングを実践する者のことを指します。</p>
+                        </div>
+                        <div class="stance-divider"></div>
+
+                        <div class="stance-item">
+                            <div class="stance-ic">⚖️</div>
+                            <p>資格・職種の優劣や認定を目的としません。</p>
+                        </div>
+                        <div class="stance-divider"></div>
+
+                        <div class="stance-item">
+                            <div class="stance-ic">💬</div>
+                            <p>ATHJは「アスレティックトレーニングとは何か」を“唯一の正解”として決める場ではありません。現場の実践と課題から共通理解を育てます。</p>
+                        </div>
                     </div>
-                    <div style="background: var(--color-white); padding: 1.5rem; border: 1px solid #e2e8f0; border-left: 4px solid #94a3b8; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.02);">
-                        <h3 style="color: var(--color-primary); margin-bottom: 1rem; font-size: 1.2rem;">ATHJがしないこと（境界線）</h3>
-                        <ul style="list-style: none; padding: 0;">
-                            <li style="margin-bottom: 0.5rem;">✔️ 資格の認定・序列化</li>
-                            <li style="margin-bottom: 0.5rem;">✔️ 免許・法令の範囲を超える医療行為</li>
-                            <li style="margin-bottom: 0.5rem;">✔️ 個人・チームが特定される情報共有</li>
-                            <li>✔️ 特定団体への介入や交渉代行など利害トラブルを生む運用</li>
+
+                    <div class="stance-card">
+                        <div class="stance-tag">BOUNDARY</div>
+                        <h3 class="stance-title">ATHJがしないこと（境界線）</h3>
+                        <div class="stance-accent"></div>
+
+                        <ul class="boundary-list">
+                            <li><span class="chk">✓</span> 資格の認定・序列化</li>
+                            <li><span class="chk">✓</span> 免許・法令の範囲を超える医療行為</li>
+                            <li><span class="chk">✓</span> 個人・チームが特定される情報共有</li>
+                            <li><span class="chk">✓</span> 特定団体への介入や交渉代行など利害トラブルを生む運用</li>
                         </ul>
                     </div>
                 </div>
-                
-                <div style="background: #f8fafc; border-radius: 8px; padding: 1.5rem; border: 1px solid #e2e8f0;">
-                    <h3 style="font-weight: bold; font-size: 1.1rem; color: var(--color-primary); margin-bottom: 1rem;">参加対象</h3>
-                    <p style="font-size: 0.95rem; line-height: 1.6; margin-bottom: 0;">
-                        ・実践者：現在、スポーツ現場でAthletic Training業務に関わる方<br>
-                        ・志望者：将来関わりたい方（一部領域で情報制限あり）
-                    </p>
+
+                <div class="participant-box">
+                    <h3 class="participant-box__heading">参加対象</h3>
+                    <ul class="participant-box__list">
+                        <li>実践者：現在、スポーツ現場でAthletic Training業務に関わる方</li>
+                        <li>志望者：将来関わりたい方（※一部領域で情報制限あり）</li>
+                        <li>応援（情報受取）：ATHJの活動情報を受け取りたい方（※情報配信のみ）</li>
+                    </ul>
                 </div>
             </div>
         </section>
 
         <!-- New) Community Preparation -->
-        <section id="operations" class="section bg-light">
+        <section id="operations" class="section bg-light reveal">
             <div class="container text-center">
-                <details class="policy" style="background: var(--color-white); margin-bottom: 0; box-shadow: 0 2px 4px rgba(0,0,0,0.02);">
+                <details class="policy" style="background: var(--color-card-bg); margin-bottom: 0; box-shadow: 0 2px 4px var(--color-card-shadow);">
                     <summary style="text-align: center; font-size: 1.3rem;">コミュニティ（準備中）</summary>
                     <div style="margin-top: 1.5rem; text-align: left;">
                         <p class="jp-wrap" style="line-height: 1.8; color: var(--color-text-main); margin-bottom: 1.5rem;">
@@ -143,21 +319,16 @@
         </section>
 
         <!-- 4) Activities -->
-        <section id="activities" class="section">
+        <section id="activities" class="section reveal">
             <div class="container">
-                <h2 class="section-title">ATHJが取り組むこと</h2>
+                <h2 class="section-title">これから取り組むこと（宣言）</h2>
                 <div class="activities-grid">
-                    <div class="activity-card">
+                    <div class="activity-card reveal reveal-delay-1">
                         <div class="icon">🗣️</div>
                         <h4>言葉にする（価値の言語化）</h4>
                         <p>現場の役割・判断・連携を「説明できる言葉」にし、社会に伝わる形に整えます。</p>
                     </div>
-                    <div class="activity-card">
-                        <div class="icon">📝</div>
-                        <h4>型にする（テンプレ・手順の整備）</h4>
-                        <p>職務説明、緊急対応フロー、連絡フロー、チェックリストなど、現場で使える“型”を整備します。</p>
-                    </div>
-                    <div class="activity-card">
+                    <div class="activity-card reveal reveal-delay-3">
                         <div class="icon">📡</div>
                         <h4>社会に届ける（発信）</h4>
                         <p>現場の価値が伝わる形で、継続的に発信します。</p>
@@ -165,13 +336,13 @@
                 </div>
                 <div class="activities-note">
                     <p>※取り組みは段階的に進め、状況に応じて見直します。<br>
-                    （検討中）実態把握アンケート、求人・機会の可視化など。</p>
+                    （検討中）型にする（テンプレ・手順の整備）、実態把握アンケート、求人・機会の可視化など。</p>
                 </div>
             </div>
         </section>
 
         <!-- 5) Join & Contact -->
-        <section id="join" class="section text-center">
+        <section id="join" class="section text-center reveal">
             <div class="container">
                 <h2 class="section-title">登録・お問い合わせ</h2>
                 <p class="cta-desc" style="margin-bottom: 2rem;">ATHJの趣旨に賛同し、共に活動いただける方の登録をお待ちしています。</p>
@@ -193,8 +364,8 @@
                     </ul>
                 </details>
 
-                <div class="contact-info" style="margin-top: 2rem; border-top: 1px solid #e2e8f0; padding-top: 2rem;">
-                    <h4 style="font-weight: bold; color: var(--color-primary); margin-bottom: 0.5rem;">運営・お問い合わせ</h4>
+                <div class="contact-info" style="margin-top: 2rem; border-top: 1px solid var(--color-card-border); padding-top: 2rem;">
+                    <h4 style="font-weight: bold; color: var(--color-primary); margin-bottom: 0.5rem; font-family: var(--font-heading);">運営・お問い合わせ</h4>
                     <p style="font-size: 0.95rem;">本プロジェクトは、運営チーム（準備室）が準備・運営しています。<br>お問い合わせ: <a href="mailto:athj.info@gmail.com" style="color: var(--color-accent); text-decoration: underline; font-weight: bold;">athj.info@gmail.com</a></p>
                 </div>
             </div>
