@@ -800,6 +800,13 @@ body.dark-mode .chk,
   opacity: 1 !important;
 }
 
+/* Hero brand styling for English site title */
+.hero-brand{
+  color: #f0a500;
+  font-weight: 600;
+  letter-spacing: .02em;
+}
+
 @media (prefers-color-scheme: dark) {
   .stance-card {
     background: #ffffff !important;
