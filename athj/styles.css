@@ -166,6 +166,11 @@ img {
     box-shadow: 0 8px 16px rgba(245, 158, 11, 0.2);
 }
 
+.why-tagline {
+    margin-top: 1.2rem;
+    font-weight: 700;
+}
+
 /* Header */
 .site-header {
     background-color: var(--color-card-bg);
